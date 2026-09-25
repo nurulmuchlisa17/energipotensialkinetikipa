@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LORD ENERGI — Misi Menyelamatkan Energy Core</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell" style="max-width:640px;">
+
+  <!-- ===================== SPLASH: COVER GAME ===================== -->
+  <section id="screen-splash">
+    <div class="panel" style="padding:0; overflow:hidden;">
+      <img src="assets/images/cover-lord-energi.jpg" alt="LORD ENERGI — Misi Mengalahkan Lord Energi" style="width:100%; display:block;">
+      <div style="padding:24px;">
+        <p class="center mt-0">Game Edukasi IPA — Energi Potensial &amp; Energi Kinetik &middot; SMP Kelas VIII</p>
+        <div class="btn-row center">
+          <button class="btn" id="btnMulaiGame">MULAI GAME</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 1: IDENTITAS SISWA ===================== -->
+  <section id="screen-identitas" class="hidden">
+    <div class="panel center">
+      <div class="eyebrow">LORD ENERGI</div>
+      <h1 class="display">Misi Menyelamatkan Energy Core</h1>
+      <p>Game Edukasi IPA — Energi Potensial &amp; Energi Kinetik<br>SMP Kelas VIII</p>
+    </div>
+
+    <div class="panel">
+      <h2 style="font-size:1.05rem;">Isi Data Kelompok Sebelum Memulai</h2>
+      <p class="small muted mt-0">Game ini dimainkan secara berkelompok, 3–6 orang per kelompok.</p>
+
+      <label for="inputNama">Nama Kelompok</label>
+      <input type="text" id="inputNama" placeholder="Contoh: Kelompok Energi 1">
+
+      <label for="inputKelas">Kelas</label>
+      <input type="text" id="inputKelas" placeholder="Contoh: VIII-A">
+
+      <label class="mt-0">Anggota Kelompok (minimal 3, maksimal 6)</label>
+      <div id="anggotaWrap">
+        <input type="text" class="anggota-input" data-idx="1" placeholder="Anggota 1 (wajib)">
+        <input type="text" class="anggota-input" data-idx="2" placeholder="Anggota 2 (wajib)">
+        <input type="text" class="anggota-input" data-idx="3" placeholder="Anggota 3 (wajib)">
+        <input type="text" class="anggota-input hidden" data-idx="4" placeholder="Anggota 4 (opsional)">
+        <input type="text" class="anggota-input hidden" data-idx="5" placeholder="Anggota 5 (opsional)">
+        <input type="text" class="anggota-input hidden" data-idx="6" placeholder="Anggota 6 (opsional)">
+      </div>
+      <div class="btn-row" style="margin-top:-6px; margin-bottom:16px;">
+        <button type="button" class="btn btn-secondary" id="btnTambahAnggota">+ TAMBAH ANGGOTA</button>
+      </div>
+
+      <p class="small muted">Data ini hanya digunakan untuk mencatat hasil belajar kelompokmu selama sesi permainan berlangsung.</p>
+      <div id="errIdentitas" class="feedback no hidden"></div>
+
+      <div class="btn-row center">
+        <button class="btn" id="btnMulaiPetualangan">MULAI PETUALANGAN</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 2: OPENING STORY ===================== -->
+  <section id="screen-opening" class="hidden">
+    <div class="panel">
+      <div class="eyebrow">PROLOG</div>
+      <h1 class="display">Kota Energi Dalam Bahaya</h1>
+    </div>
+
+    <div class="panel" style="padding:0; overflow:hidden;">
+      <img src="assets/images/kota-energi-tenang.jpg" alt="Kota Energi yang tenang, Energy Core menyala terang" style="width:100%; display:block;">
+      <p class="narasi" style="margin:20px;">
+        Kota Energi merupakan kota yang seluruh aktivitasnya bergantung pada sebuah sumber energi bernama
+        <b>ENERGY CORE</b> — sumber cahaya yang menjaga seluruh kota tetap hidup dan seimbang.
+      </p>
+    </div>
+
+    <div class="panel" style="padding:0; overflow:hidden;">
+      <img src="assets/images/kota-energi-krisis.jpg" alt="Kota Energi dalam krisis, langit gelap dan Energy Core terguncang" style="width:100%; display:block;">
+      <p class="narasi" style="margin:20px;">
+        Namun suatu malam, <b>Energy Core direnggut paksa</b>. Lampu-lampu kota padam satu per satu,
+        dan keseimbangan energi Kota Energi pun terguncang.
+      </p>
+    </div>
+
+    <div class="panel" style="padding:0; overflow:hidden;">
+      <img src="assets/images/lord-energi-closeup.jpg" alt="Lord Energi menggenggam Energy Core yang dicuri" style="width:100%; display:block;">
+      <p class="narasi" style="margin:20px;">
+        Di balik semua ini berdiri seorang villain bernama <b>LORD ENERGI</b>. Kini Energy Core berada
+        dalam genggamannya, dan hanya penyelidikan ilmiah yang dapat merebutnya kembali.
+      </p>
+    </div>
+
+    <div class="panel">
+      <p class="narasi">
+        Kamu berperan sebagai <b>ENERGY HERO</b>. Untuk mendapatkan kembali Energy Core, kamu harus
+        menyelidiki dan menemukan sendiri rahasia energi — bukan langsung diberi jawabannya.
+      </p>
+      <p class="narasi">
+        Amati &rarr; Kumpulkan data &rarr; Olah data &rarr; Temukan pola &rarr; Hadapi Lord Energi.
+      </p>
+
+      <div class="btn-row center">
+        <button class="btn" id="btnMulaiPenyelidikan">MULAI PENYELIDIKAN</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="js/questions.js"></script>
+<script>
+  document.getElementById("btnMulaiGame").onclick = () => {
+    document.getElementById("screen-splash").classList.add("hidden");
+    document.getElementById("screen-identitas").classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  let anggotaVisibleCount = 3;
+  document.getElementById("btnTambahAnggota").onclick = () => {
+    if (anggotaVisibleCount >= 6) return;
+    anggotaVisibleCount++;
+    document.querySelector(`.anggota-input[data-idx="${anggotaVisibleCount}"]`).classList.remove("hidden");
+    if (anggotaVisibleCount >= 6) document.getElementById("btnTambahAnggota").disabled = true;
+  };
+
+  document.getElementById("btnMulaiPetualangan").onclick = () => {
+    const nama = document.getElementById("inputNama").value.trim();
+    const kelas = document.getElementById("inputKelas").value.trim();
+    const anggota = Array.from(document.querySelectorAll(".anggota-input"))
+      .map(el => el.value.trim())
+      .filter(v => v.length > 0);
+    const err = document.getElementById("errIdentitas");
+
+    if (!nama || !kelas) {
+      err.textContent = "Nama kelompok dan kelas wajib diisi sebelum memulai petualangan.";
+      err.classList.remove("hidden");
+      return;
+    }
+    if (anggota.length < 3) {
+      err.textContent = "Minimal 3 anggota kelompok harus diisi.";
+      err.classList.remove("hidden");
+      return;
+    }
+    err.classList.add("hidden");
+
+    sessionStorage.setItem("le_nama", nama);
+    sessionStorage.setItem("le_kelas", kelas);
+    sessionStorage.setItem("le_anggota", JSON.stringify(anggota));
+    sessionStorage.removeItem("le_session"); // sesi baru setiap kali mulai dari awal
+
+    document.getElementById("screen-identitas").classList.add("hidden");
+    document.getElementById("screen-opening").classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  document.getElementById("btnMulaiPenyelidikan").onclick = () => {
+    window.location.href = "game.html";
+  };
+</script>
+</body>
+</html>
