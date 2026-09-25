@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LORD ENERGI — Penyelidikan Energi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <div class="hud">
+    <div class="hud-title">⚡ LORD ENERGI</div>
+    <div class="hud-stats">
+      <span>Kelompok: <b id="hudNama">-</b></span>
+      <span>Kelas: <b id="hudKelas">-</b></span>
+      <span>Skor: <b id="hudSkor">0</b></span>
+    </div>
+  </div>
+
+  <div class="progress-track" id="progressTrack"></div>
+
+  <!-- ================= TAHAP 1: STIMULUS ================= -->
+  <section id="screen-stimulus" class="game-screen">
+    <div class="panel">
+      <div class="eyebrow">TAHAP 1 — STIMULUS</div>
+      <h1 class="display" style="font-size:1.4rem;">Misteri Energy Core</h1>
+      <p>Amati fenomena-fenomena berikut sebelum kamu mulai menyelidiki. Jangan buru-buru — perhatikan baik-baik apa yang terjadi pada setiap benda.</p>
+    </div>
+
+    <div id="stimulusFenomena"></div>
+
+    <div class="panel">
+      <div class="eyebrow">Pertanyaan Pemantik</div>
+      <div id="stimulusPertanyaan"></div>
+      <p class="small muted">Kamu tidak perlu menjawab sekarang. Simpan pertanyaan ini dalam pikiranmu selama proses penyelidikan.</p>
+      <div class="btn-row end">
+        <button class="btn" id="btnLanjutInvestigasi">LANJUT KE INVESTIGASI</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAHAP 2: PENGUMPULAN DATA ================= -->
+  <section id="screen-investigasi" class="game-screen hidden">
+    <div class="panel">
+      <div class="eyebrow">TAHAP 2 — PENGUMPULAN DATA</div>
+      <h1 class="display" style="font-size:1.4rem;">Energy Investigation</h1>
+      <p>Jalankan tiga misi eksperimen virtual di bawah ini untuk mengumpulkan data. Semua misi harus selesai sebelum kamu bisa lanjut ke ruang analisis.</p>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow">Misi 1 — Investigasi Energi Potensial <span id="status-misi1" class="small"></span></div>
+      <p class="mt-0">Benda ditempatkan pada ketinggian berbeda (massa tetap 2 kg, g = 10 m/s²). Jalankan percobaan untuk melihat perubahan energi potensial.</p>
+      <div class="sim-stage" id="simStageEp"></div>
+      <div class="btn-row"><button class="btn btn-secondary" id="btnJalankanEp">JALANKAN PERCOBAAN</button></div>
+      <div id="tabelEp"></div>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow">Misi 2 — Investigasi Energi Kinetik <span id="status-misi2" class="small"></span></div>
+      <p class="mt-0">Benda bergerak dengan kecepatan berbeda (massa tetap 2 kg). Jalankan percobaan untuk melihat perubahan energi kinetik.</p>
+      <div class="sim-stage" id="simStageEk"></div>
+      <div class="btn-row"><button class="btn btn-secondary" id="btnJalankanEk">JALANKAN PERCOBAAN</button></div>
+      <div id="tabelEk"></div>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow">Misi 3 — Pengaruh Massa <span id="status-misi3" class="small"></span></div>
+      <p class="mt-0">Massa benda diubah-ubah sementara ketinggian dan kecepatan tetap. Amati apa yang terjadi pada energi ketika massa bertambah.</p>
+      <div id="tabelMassa"></div>
+      <div class="btn-row"><button class="btn btn-secondary" id="btnJalankanMassa">CATAT HASIL PENGAMATAN</button></div>
+    </div>
+
+    <div class="panel">
+      <p class="small muted">Selesaikan ketiga misi untuk membuka ruang analisis.</p>
+      <div class="btn-row end">
+        <button class="btn" id="btnLanjutPengolahan" disabled>LANJUT KE ENERGY ANALYST</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAHAP 3: PENGOLAHAN DATA ================= -->
+  <section id="screen-pengolahan" class="game-screen hidden">
+    <div class="panel">
+      <div class="eyebrow">TAHAP 3 — PENGOLAHAN DATA</div>
+      <h1 class="display" style="font-size:1.4rem;">Energy Analyst</h1>
+      <p>Bandingkan data yang sudah kamu kumpulkan, lalu temukan pola di baliknya.</p>
+    </div>
+
+    <div id="analisisWrap"></div>
+
+    <div class="panel" id="rumusReveal">
+      <div class="eyebrow">Penemuan — Rumus Energi</div>
+      <p>Berdasarkan pola yang kamu temukan, para ilmuwan Kota Energi merumuskannya sebagai berikut:</p>
+      <div class="result-grid">
+        <div class="stat-card"><div class="num" style="font-size:1.1rem;">Ep = m × g × h</div><div class="lbl">Energi Potensial</div></div>
+        <div class="stat-card"><div class="num" style="font-size:1.1rem;">Ek = ½ × m × v²</div><div class="lbl">Energi Kinetik</div></div>
+      </div>
+    </div>
+
+    <div class="panel hidden" id="cekPerhitungan">
+      <div class="eyebrow">Validasi — Gunakan Rumusnya</div>
+      <p id="soalPerhitungan"></p>
+      <input type="number" id="inputPerhitungan" placeholder="Jawaban (Joule)">
+      <div class="btn-row"><button class="btn" id="btnCekJawabanHitung">PERIKSA JAWABAN</button></div>
+      <div class="feedback hidden" id="fbPerhitungan"></div>
+    </div>
+
+    <div class="panel">
+      <div class="btn-row end">
+        <button class="btn" id="btnLanjutTransformasi" disabled>LANJUT KE TRANSFORMASI ENERGI</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRANSFORMASI ENERGI ================= -->
+  <section id="screen-transformasi" class="game-screen hidden">
+    <div class="panel">
+      <div class="eyebrow">TRANSFORMASI ENERGI</div>
+      <h1 class="display" style="font-size:1.4rem;">Roller Coaster Energy</h1>
+      <p>Gerakkan benda ke titik A, B, dan C pada lintasan untuk melihat bagaimana energi potensial dan energi kinetik saling berubah.</p>
+
+      <div class="sim-stage" id="stageRoller"></div>
+      <div class="gap-sm center" style="justify-content:center;">
+        <button class="btn btn-secondary" id="btnTitikA">TITIK A</button>
+        <button class="btn btn-secondary" id="btnTitikB">TITIK B</button>
+        <button class="btn btn-secondary" id="btnTitikC">TITIK C</button>
+      </div>
+
+      <div style="margin-top:18px;">
+        <div class="bar-wrap">
+          <div class="bar-label">ENERGI POTENSIAL</div>
+          <div class="bar-track"><div class="bar-fill ep" id="barEpFill" style="width:0%;"></div></div>
+          <div class="small" id="barEpVal">-</div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-label">ENERGI KINETIK</div>
+          <div class="bar-track"><div class="bar-fill ek" id="barEkFill" style="width:0%;"></div></div>
+          <div class="small" id="barEkVal">-</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="rollerQuestionWrap"></div>
+
+    <div class="panel">
+      <div class="btn-row end">
+        <button class="btn" id="btnLanjutDiscoveryCheck" disabled>LANJUT KE DISCOVERY CHECK</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DISCOVERY CHECK ================= -->
+  <section id="screen-discovery-check" class="game-screen hidden">
+    <div class="panel">
+      <div class="eyebrow">DISCOVERY CHECK</div>
+      <h1 class="display" style="font-size:1.4rem;">Uji Pemahamanmu</h1>
+      <p>Tentukan BENAR atau SALAH untuk setiap pernyataan sebelum kamu menghadapi Lord Energi.</p>
+    </div>
+
+    <div id="discoveryCheckWrap"></div>
+
+    <div class="panel">
+      <div class="btn-row end">
+        <button class="btn btn-danger" id="btnLanjutBoss" disabled>HADAPI LORD ENERGI</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BOSS BATTLE ================= -->
+  <section id="screen-boss" class="game-screen hidden">
+    <div class="panel boss-wrap">
+      <div class="eyebrow">BOSS BATTLE</div>
+      <h1 class="display" style="font-size:1.4rem;">Lord Energi</h1>
+      <img src="assets/images/lord-energi-closeup.jpg" alt="Lord Energi" class="boss-portrait">
+      <div class="boss-hp-track"><div class="boss-hp-fill" id="bossHpFill" style="width:100%;"></div></div>
+      <div id="bossHpLabel" class="small muted">100 / 100 HP</div>
+      <div class="hero-avatar" style="margin-top:18px;">🦸</div>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow" id="bossAttackCounter">Serangan 1 / 5</div>
+      <div id="bossAttackWrap"></div>
+    </div>
+
+    <div class="panel hidden center" id="bossResultBanner"></div>
+    <div class="btn-row center">
+      <button class="btn hidden" id="btnLihatHasilAkhir">LIHAT HASIL AKHIR</button>
+    </div>
+  </section>
+
+  <!-- ================= FINAL RESULT ================= -->
+  <section id="screen-final" class="game-screen hidden">
+    <div class="panel center">
+      <div class="eyebrow">MISI SELESAI</div>
+      <h1 class="display">Energy Core Berhasil Diselamatkan!</h1>
+      <p>Terima kasih sudah menjadi Energy Hero, Kelompok <span id="finalNamaSpan"></span>. Berikut ringkasan hasil penyelidikan kelompokmu.</p>
+    </div>
+
+    <div class="panel" id="finalStats"></div>
+
+    <div class="panel small muted center" id="statusKirim">Menyiapkan pengiriman hasil...</div>
+
+    <div class="btn-row center">
+      <a class="btn btn-secondary" href="index.html">MAIN LAGI DARI AWAL</a>
+    </div>
+  </section>
+
+</div>
+
+<script src="js/questions.js"></script>
+<script src="js/discovery.js"></script>
+<script src="js/api.js"></script>
+<script src="js/game.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const nama = sessionStorage.getItem("le_nama");
+    if (nama) document.getElementById("finalNamaSpan").textContent = nama;
+  });
+</script>
+</body>
+</html>
